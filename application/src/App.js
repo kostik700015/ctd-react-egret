@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 function App() {
-  const [changed, setChanged] = useState(true);
+  const [changed, setChanged] = useState('');
   const [todoList, setTodoList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [displayTodo, setDisplayTodo] = useState([]);
@@ -56,7 +56,7 @@ function App() {
       'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
     }
     }).then(res => res.json())
-      .then(res =>setChanged(false));
+      .then(res =>setChanged(res));
   }
 
   function removeTodo(id) {
@@ -67,7 +67,7 @@ function App() {
       'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
     }
     }).then(res => res.json())
-      .then(res =>setChanged(true));
+      .then(res =>setChanged(res));
   }
 
   const chooseCategory = (index, id) => {

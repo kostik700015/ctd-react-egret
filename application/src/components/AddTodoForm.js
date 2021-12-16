@@ -11,6 +11,7 @@ const AddTodoForm = (props) => {
 
   const handleDate = (event) => {
     onChange(event)
+    setPopOut(false)
   };
 
   const handleAddTodo = (event) => {
@@ -32,12 +33,14 @@ const AddTodoForm = (props) => {
     <div>
       <form onSubmit={handleAddTodo}>
         <div className="input-group">
-        <InputWithLabel 
-          todoTitle={todoTitle} 
-          handleTitleChange={handleTitleChange}
-        />
-        <button className="add-button" onClick={handleCalendar}>Calendar</button>
-        <button type="submit" className="add-button">Add Todo</button>
+          <InputWithLabel 
+            todoTitle={todoTitle} 
+            handleTitleChange={handleTitleChange}
+          />
+          <div>
+            <span className="calendar" onClick={handleCalendar}>Calendar</span>
+            <button type="submit" className="add-button">Add Todo</button>
+          </div>
         </div>
         { popOut ?
         <Calendar
