@@ -60,6 +60,15 @@ body {
   padding-top: 5px;
 }
 
+.category-name {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 24px;
+  color: rgb(11, 78, 90);
+  font-weight: 800px;
+  text-transform: uppercase;
+}
+
 .input-field {
   margin-top: 10px;
 }
@@ -127,7 +136,7 @@ input {
 
 .react-calendar { 
   width: 400px;
-  margin: 40px auto;
+  margin: 0px auto 40px;
   padding-top: 20px;
 }
 

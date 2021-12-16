@@ -11,7 +11,7 @@ import {
 
 function App() {
   const [changed, setChanged] = useState(true);
-  const [todoList, setTodoList] = useState(true);
+  const [todoList, setTodoList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [displayTodo, setDisplayTodo] = useState([]);
   const [choosedCategory, setChoosedCategory] = useState(0);
@@ -19,7 +19,6 @@ function App() {
   const [value, onChange] = useState(new Date());
 
   const handleDate = (event) => {
-    // console.log(event)
     onChange(event)
   };
 
@@ -65,24 +64,25 @@ function App() {
     }).then(res => res.json())
       .then(res =>setChanged(false));
   }
-  console.log(categoryList)
+
   function removeTodo(id) {
-    const newList = displayTodo.filter(
-      (todo) => todo.id !== id
-    )
-    setDisplayTodo(newList)
+    // const newList = todoList.filter(
+    //   (todo) => todo.id !== id
+    // )
+    // setDisplayTodo(newList)
+
+    fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Todos/${id}`,
+    { method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
+    }
+    }).then(res => res.json())
+      .then(res =>setChanged(true));
   }
 
   const chooseCategory = (index, id) => {
     setChoosedCategory(id);
-    var todosId = categoryList[index].fields.Todos;
-    // console.log(todosId)
-    var array = [];
-    todosId.forEach( (id) => {
-      var temp = todoList.filter((todo) => todo.id === id)
-      array.push(temp[0])
-    })
-    setDisplayTodo(array)
   }
 
   const filterByCategory  = (todos) => {
@@ -110,6 +110,7 @@ function App() {
         <Route key={category.id} path={`/${category.fields.Name}`}>
           {category.fields.Name === "All" ? <Redirect to="/" /> :
           <>
+          <div className='category-name'>{category.fields.Name}</div>
           <Calendar
             onChange={handleDate}
             value={value}
@@ -117,7 +118,6 @@ function App() {
           />
           <TodoContainer
             addTodo={addTodo}
-            // displayTodo={displayTodo}
             displayTodo={filterByCategory(category.fields.Todos)}
             removeTodo={removeTodo}
             isLoading={isLoading}
