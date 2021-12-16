@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import TodoContainer from './components/TodoContainer'
 import Header from './components/Header'
-import Calendar from 'react-calendar';
 import './App.css'
 import {
   BrowserRouter,
@@ -16,11 +15,6 @@ function App() {
   const [displayTodo, setDisplayTodo] = useState([]);
   const [choosedCategory, setChoosedCategory] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [value, onChange] = useState(new Date());
-
-  const handleDate = (event) => {
-    onChange(event)
-  };
 
   useEffect(()=>{
     const headers = { 'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}` }
@@ -66,11 +60,6 @@ function App() {
   }
 
   function removeTodo(id) {
-    // const newList = todoList.filter(
-    //   (todo) => todo.id !== id
-    // )
-    // setDisplayTodo(newList)
-
     fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Todos/${id}`,
     { method: 'DELETE',
     headers: {
@@ -96,7 +85,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Header categories={categoryList} chooseCategory={chooseCategory}/>
+      <Header categories={categoryList} chooseCategory={chooseCategory}/>
       <Route exact path="/">
         <TodoContainer
           addTodo={addTodo}
@@ -111,17 +100,11 @@ function App() {
           {category.fields.Name === "All" ? <Redirect to="/" /> :
           <>
           <div className='category-name'>{category.fields.Name}</div>
-          <Calendar
-            onChange={handleDate}
-            value={value}
-            className="react-calendar"
-          />
           <TodoContainer
             addTodo={addTodo}
             displayTodo={filterByCategory(category.fields.Todos)}
             removeTodo={removeTodo}
             isLoading={isLoading}
-            value={value}
           />
           </> }
         </Route>

@@ -3,7 +3,6 @@ import TodoListItem from './TodoListItem'
 import PropTypes from 'prop-types';
 
 function TodoList({todoList, onRemoveTodo}){
-  console.log(todoList)
   return (
     <ul>
       {todoList.map((todo)=>{
