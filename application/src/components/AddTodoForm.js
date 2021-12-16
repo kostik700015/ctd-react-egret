@@ -1,13 +1,14 @@
 import React from 'react'
 import { useState } from 'react';
 import InputWithLabel from './InputWithLabel';
+import PropTypes from 'prop-types';
 
 const AddTodoForm = (props) => {
   const[todoTitle, setTodoTitle] = useState('');
 
   const handleAddTodo = (event) => {
     event.preventDefault();
-    props.onAddTodo({id: Date.now().toString(), fields: {Title: todoTitle}})
+    props.onAddTodo(todoTitle, props.value)
     setTodoTitle('');
   }
 
@@ -15,9 +16,10 @@ const AddTodoForm = (props) => {
     const newTodoTitle = event.target.value;
     setTodoTitle(newTodoTitle);
   }; 
-
+  
   return (
     <div>
+      
       <form onSubmit={handleAddTodo}>
         <div className="input-group">
         <InputWithLabel 
@@ -30,5 +32,9 @@ const AddTodoForm = (props) => {
     </div>
   )
 }
+
+AddTodoForm.propTypes = {
+  onAddTodo: PropTypes.func
+};
 
 export default AddTodoForm

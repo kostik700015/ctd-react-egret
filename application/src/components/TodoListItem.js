@@ -1,4 +1,5 @@
 import styles from './TodoListItem.module.css'
+import PropTypes from 'prop-types';
 
 const TodoListItem = ({todo, onRemoveTodo}) => {
 
@@ -18,9 +19,17 @@ const TodoListItem = ({todo, onRemoveTodo}) => {
   return (
     <li id={"li" + todo.id} className={styles.ListItem}>
       <span id={"todo" + todo.id} className=""><input type="checkbox" onClick={(e)=>CrossedOut(e, todo.id)} />{todo.fields.Title} </span>
+      <div>
+      <span style={{marginRight: '15px'}}>{todo.fields.Date}</span>
       <button type='button' onClick={() => onRemoveTodo(todo.id)}>Delete</button>
+      </div>
     </li>
   )
 }
+
+TodoListItem.propTypes = {
+  todo: PropTypes.object,
+  onRemoveTodo: PropTypes.func
+};
 
 export default TodoListItem;

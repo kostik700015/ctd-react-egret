@@ -1,18 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import AddTodoForm from './AddTodoForm';
-import TodoList from'./TodoList'
-import CategoryList from './CategoryList'
+import TodoContainer from './components/TodoContainer'
+import Header from './components/Header'
 import './App.css'
 import {
   BrowserRouter,
-  Switch,
   Route
 } from "react-router-dom";
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
+  const [changed, setChanged] = useState(true);
+  const [todoList, setTodoList] = useState(true);
   const [categoryList, setCategoryList] = useState([]);
   const [displayTodo, setDisplayTodo] = useState([]);
+  const [choosedCategory, setChoosedCategory] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(()=>{
@@ -26,23 +26,37 @@ function App() {
       setTodoList(result1.records);
       setDisplayTodo(result1.records);
       setCategoryList(result2.records);
-      console.log(result1.records)
-      console.log(result2.records)
       setIsLoading(false);
     });
-  }, [])
+  }, [changed])
 
-  useEffect(() => {
-    if(isLoading === false) {
-      const json = JSON.stringify(todoList);
-      localStorage.setItem('todoList', json)
+  const addTodo = (newTodoTitle, date) => {
+    const newtodo = {
+      "records": [
+        {
+          "fields": {
+            "Categories": [
+              choosedCategory
+            ],
+            "Title": newTodoTitle,
+            "Date": date.toISOString().substring(0, 10)
+          },
+        },
+      ]
     }
-  }, [todoList, isLoading]);
+    console.log(newtodo)
 
-  const addTodo = (newTodo) => {
-    setDisplayTodo([...displayTodo, newTodo])
+    fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Todos`,
+    { method: 'POST',
+    body: JSON.stringify(newtodo),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
+    }
+    }).then(res => res.json())
+      .then(res =>setChanged(false));
   }
-
+  // console.log(displayTodo)
   function removeTodo(id) {
     const newList = displayTodo.filter(
       (todo) => todo.id !== id
@@ -50,11 +64,12 @@ function App() {
     setDisplayTodo(newList)
   }
 
-  const chooseCategory = (index) => {
-    var todoId = categoryList[index].fields.Todos;
-    console.log(todoId)
+  const chooseCategory = (index, id) => {
+    setChoosedCategory(id);
+    var todosId = categoryList[index].fields.Todos;
+    // console.log(todosId)
     var array = [];
-    todoId.forEach( (id) => {
+    todosId.forEach( (id) => {
       var temp = todoList.filter((todo) => todo.id === id)
       array.push(temp[0])
     })
@@ -63,23 +78,25 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <div className="">
-            <div className="header">
-              <h1>Todo List</h1>
-            </div>
-            <CategoryList categories={categoryList} chooseCategory={chooseCategory}/>
-            <div className="todo">
-              <AddTodoForm onAddTodo={addTodo} />
-              {isLoading ? <span>Loading...</span> : <TodoList todoList={displayTodo} onRemoveTodo={removeTodo}/>}
-            </div>
-          </div>
+    <Header categories={categoryList} chooseCategory={chooseCategory}/>
+      <Route exact path="/">
+        <TodoContainer
+          addTodo={addTodo}
+          displayTodo={displayTodo}
+          removeTodo={removeTodo}
+          isLoading={isLoading} 
+        />
+      </Route>
+      {categoryList.map((category)=>(
+        <Route key={category.id} path={`/${category.fields.Name}`}>
+          <TodoContainer
+            addTodo={addTodo}
+            displayTodo={displayTodo}
+            removeTodo={removeTodo}
+            isLoading={isLoading}
+          />
         </Route>
-        <Route path="/new">
-          <h1>New Todo List</h1>
-        </Route>
-      </Switch>
+      ))}
     </BrowserRouter>
   )
 }
