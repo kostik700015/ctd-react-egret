@@ -92,15 +92,28 @@ body {
   border: 0px;
   border-radius: 5px;
   background:  rgb(189, 223, 221);
-  padding: 14px 16px 10px 16px;
+  padding: 11px;
   font-size: 16px;
   font-weight: 600;
-  margin: 18px 0;
+  margin: 18px 10px 12px;
+}
+
+.calendar {
+  outline: 0;
+  cursor: pointer;
+  border: 0px;
+  border-radius: 5px;
+  background:  rgb(204, 209, 209);
+  padding: 11px;
+  font-size: 16px;
+  font-weight: 600;
+  margin: auto;
 }
 
 .input-group {
   display: flex;
   justify-content: start;
+  align-items: center;
 }
 
 ul {
@@ -135,7 +148,7 @@ input {
 /* calendar */
 
 .react-calendar { 
-  width: 400px;
+  width: 500px;
   margin: 0px auto 40px;
   padding-top: 20px;
 }
