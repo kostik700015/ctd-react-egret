@@ -31,6 +31,7 @@ function App() {
     });
   }, [changed])
 
+  console.log(categoryList)
   const addTodo = (newTodoTitle, date) => {
     const newtodo = {
       "records": [
@@ -75,11 +76,14 @@ function App() {
   }
 
   const filterByCategory  = (todos) => {
+    console.log(todos)
     var array = [];
-    todos.forEach( (todoId) => {
-      var temp = todoList.filter((todo) => todo.id === todoId)
-      array.push(temp[0])
-    })
+    if (todos != null) {
+      todos.forEach( (todoId) => {
+        var temp = todoList.filter((todo) => todo.id === todoId)
+        array.push(temp[0])
+      })
+    }
     return array
   }
 
