@@ -1,57 +1,70 @@
-# React: Todo List
+# Getting Started with Create React App
 
-## Overview
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This sixteen-week project will teach you how to build a basic Todo List application with React.
+## Available Scripts
 
-Each lesson is a an individual assignment, but you will work out of the same repository for the entire project. See instructions below for how to submit each week.
+In the project directory, you can run:
 
-Grading for this project is less rigid, given the open-ended instructions ([View Grading Rubric](instructions/rubric.md)). Make sure to follow the checklist for each lesson, but how you implement each task is entirely up to you!
+### `yarn start`
 
-## Instructions
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### **Section 1:** React Fundamentals
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-- [Lesson 1.1](instructions/section-1/lesson-1-1.md)
-- [Lesson 1.2](instructions/section-1/lesson-1-2.md)
-- [Lesson 1.3](instructions/section-1/lesson-1-3.md)
-- [Lesson 1.4](instructions/section-1/lesson-1-4.md)
-- [Lesson 1.5](instructions/section-1/lesson-1-5.md)
-- [Lesson 1.6](instructions/section-1/lesson-1-6.md)
-- [Lesson 1.7](instructions/section-1/lesson-1-7.md)
-- [Lesson 1.8](instructions/section-1/lesson-1-8.md)
-- [Lesson 1.9](instructions/section-1/lesson-1-9.md)
+### `yarn test`
 
-### **Section 2:** React Legacy
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-- [Lesson 2.1](instructions/section-1/lesson-2-1.md)
+### `yarn build`
 
-### **Section 3:** React Styling
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-- [Lesson 3.1](instructions/section-3/lesson-3-1.md)
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-### **Section 4:** React Maintenance
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- [Lesson 4.1](instructions/section-4/lesson-4-1.md)
+### `yarn eject`
 
-### **Section 5:** React Real World
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-- [Lesson 5.1](instructions/section-5/lesson-5-1.md)
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-### **Section 6:** Deployment
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-- [Lesson 6.1](instructions/section-6/lesson-6-1.md)
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
----
+## Learn More
 
-## Issues and Feedback
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-Be encouraged to ask questions or point out issues in the assignment!
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-Mentors will be happy to help out and your fellow students will benefit from your input.
+### Code Splitting
 
-[Report an Issue](https://github.com/Code-the-Dream-School/ctd-react/issues)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
----
+### Analyzing the Bundle Size
 
-Created by [Code the Dream](https://www.codethedream.org)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `yarn build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReactComponent as All } from '../images/all.svg';
+// import { ReactComponent as All } from '../images/all.svg';
 import CategoryListItem from './CategoryListItem';
 import PropTypes from 'prop-types';
 

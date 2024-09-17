@@ -1,7 +1,7 @@
 import React from 'react'
 import AddTodoForm from './AddTodoForm';
 import TodoList from'./TodoList'
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 function TodoContainer({addTodo, displayTodo, removeTodo, isLoading, root}){
   

@@ -17,10 +17,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(()=>{
-    const headers = { 'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}` }
+    const headers = { 'Authorization': `Bearer key8F755Jwq70sIFN` }
     Promise.all([
-      fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Todos`, { headers }),
-      fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Categories`, { headers })
+      fetch(`https://api.airtable.com/v0/appEDxHmSRr4L82Fs/Todos`, { headers }),
+      fetch(`https://api.airtable.com/v0/appEDxHmSRr4L82Fs/Categories`, { headers })
     ])
     .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
     .then(([result1, result2]) => {
@@ -31,6 +31,7 @@ function App() {
     });
   }, [changed])
 
+  console.log(categoryList)
   const addTodo = (newTodoTitle, date) => {
     const newtodo = {
       "records": [
@@ -48,23 +49,23 @@ function App() {
     }
     // console.log(newtodo)
 
-    fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Todos`,
+    fetch(`https://api.airtable.com/v0/appEDxHmSRr4L82Fs/Todos`,
     { method: 'POST',
     body: JSON.stringify(newtodo),
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
+      'Authorization': `Bearer key8F755Jwq70sIFN`
     }
     }).then(res => res.json())
       .then(res =>setChanged(res));
   }
 
   function removeTodo(id) {
-    fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Todos/${id}`,
+    fetch(`https://api.airtable.com/v0/appEDxHmSRr4L82Fs/Todos/${id}`,
     { method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
+      'Authorization': `Bearer key8F755Jwq70sIFN`
     }
     }).then(res => res.json())
       .then(res =>setChanged(res));
@@ -75,11 +76,14 @@ function App() {
   }
 
   const filterByCategory  = (todos) => {
+    console.log(todos)
     var array = [];
-    todos.forEach( (todoId) => {
-      var temp = todoList.filter((todo) => todo.id === todoId)
-      array.push(temp[0])
-    })
+    if (todos != null) {
+      todos.forEach( (todoId) => {
+        var temp = todoList.filter((todo) => todo.id === todoId)
+        array.push(temp[0])
+      })
+    }
     return array
   }
 
